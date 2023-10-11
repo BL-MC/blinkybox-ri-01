@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  blinky:
+    restart: always
+    image: blinkylite/blinky-max31865-trays:5.0-arm64v8
+    container_name: blinky-max31865-trays-01
+    ports:
+      - "${NODEREDPORT}:60428"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAYTYPE}
+      - MQTTCLIENTID=${BOX}-${TRAYTYPE}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - NODEREDPORT=60428
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
